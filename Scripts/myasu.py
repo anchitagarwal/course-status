@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import re
+import smtplib
+from twilio.rest import TwilioRestClient
 
 def launchMyASU(url, username, password):
 	driver.get(url)
@@ -30,15 +32,42 @@ def isCourseAvailable():
 	if re.match(r".*triangle.*", seatsLine):
 		print "Bad luck man! Try again later :)"
 	elif re.match(r".*circle.*", seatsLine):
-		print "Seats open, gogogo!"
+		sendMail()
+		sendSMS()
 
 def quitBrowser():
 	driver.quit()
+
+def sendMail():
+	# Connecting to SMTP server
+	smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
+	smtpObj.ehlo()
+	smtpObj.starttls()
+	# Login
+	smtpObj.login(GMAIL_USERNAME, GMAIL_PASSWORD)
+	# Prepare email body
+	FROM = 'seats.open@myasu.com'
+	TO = 'anchit008@gmail.com'
+	MESSAGE = 'From: %s\nTo: %s\nSubject: DUDE! Seats open for %s\n\nThank me later!' % (FROM, TO, COURSE)
+	# Send email
+	smtpObj.sendmail(FROM, TO, MESSAGE)
+	smtpObj.quit()
+
+def sendSMS():
+	accountSID = "TWILIO_ACCOUNT_SID"
+	authToken = "TWILIO_AUTH_TOKEN"
+	twilioClient = TwilioRestClient(accountSID, authToken)
+	myTwilioNumber = "TWILIO_NUMBER"
+	myCellNumber = "YOUR_NUMBER"
+	smsBody = "DUDE! Seats open for %s!!" % COURSE
+	message = twilioClient.messages.create(body=smsBody, from_=myTwilioNumber, to=myCellNumber)
 
 MY_ASU_URL = "https://weblogin.asu.edu/cas/login?service=https%3A%2F%2Fweblogin.asu.edu%2Fcgi-bin%2Fcas-login%3Fcallapp%3Dhttps%253A%252F%252Fwebapp4.asu.edu%252Fmyasu%252F%253Finit%253Dfalse"
 USERNAME = "USERNAME"
 PASSWORD = "PASSWORD"
 COURSE = "COURSE"
+GMAIL_USERNAME = 'anchit008@gmail.com'
+GMAIL_PASSWORD = 'gV@1arM0rg#ul!sl'
 driver = webdriver.Firefox()
 launchMyASU(MY_ASU_URL, USERNAME, PASSWORD)
 classSearch(COURSE)
