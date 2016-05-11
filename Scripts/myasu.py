@@ -66,8 +66,8 @@ MY_ASU_URL = "https://weblogin.asu.edu/cas/login?service=https%3A%2F%2Fweblogin.
 USERNAME = "USERNAME"
 PASSWORD = "PASSWORD"
 COURSE = "COURSE"
-GMAIL_USERNAME = 'anchit008@gmail.com'
-GMAIL_PASSWORD = 'gV@1arM0rg#ul!sl'
+GMAIL_USERNAME = 'GMAIL_USERNAME'
+GMAIL_PASSWORD = 'GMAIL_PASSWORD'
 driver = webdriver.Firefox()
 launchMyASU(MY_ASU_URL, USERNAME, PASSWORD)
 classSearch(COURSE)
