@@ -36,9 +36,9 @@ def quitBrowser():
 	driver.quit()
 
 MY_ASU_URL = "https://weblogin.asu.edu/cas/login?service=https%3A%2F%2Fweblogin.asu.edu%2Fcgi-bin%2Fcas-login%3Fcallapp%3Dhttps%253A%252F%252Fwebapp4.asu.edu%252Fmyasu%252F%253Finit%253Dfalse"
-USERNAME = "aagarw41"
-PASSWORD = "Biloran08?"
-COURSE = "CSE 575"
+USERNAME = "USERNAME"
+PASSWORD = "PASSWORD"
+COURSE = "COURSE"
 driver = webdriver.Firefox()
 launchMyASU(MY_ASU_URL, USERNAME, PASSWORD)
 classSearch(COURSE)
