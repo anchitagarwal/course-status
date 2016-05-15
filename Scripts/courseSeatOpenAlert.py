@@ -3,6 +3,8 @@ from selenium.webdriver.common.keys import Keys
 import re
 import smtplib
 from twilio.rest import TwilioRestClient
+import os
+from datetime import datetime
 
 def launchMyASU(url, username, password):
 	driver.get(url)
@@ -28,12 +30,20 @@ def isCourseAvailable():
 		if re.match(r"\s*<img.*alt=\"seats.*>", line):
 			seatsLine = line
 			break
+	# Get current time
+	now = datetime.now()
+	current_time = "%s %s, %s\t%s:%s" % (now.strftime("%B"), now.day, now.year, now.hour, now.minute)
+	# open log file
+	logs = open('/tmp/myasu.logs', 'a+')
 	# print seatsLine
 	if re.match(r".*triangle.*", seatsLine):
-		print "Bad luck man! Try again later :)"
+		logs.write("[  %s  ]\tCourse %s - Bad luck man! Try again later :)\n" % (current_time, COURSE))
+		logs.close()
 	elif re.match(r".*circle.*", seatsLine):
+		logs.write("[  %s  ]\tCourse %s - DUDE! Seats open, gogogo!\n" % (current_time, COURSE))
 		sendMail()
 		sendSMS()
+		logs.close()
 
 def quitBrowser():
 	driver.quit()
@@ -69,6 +79,11 @@ COURSE = "COURSE"
 GMAIL_USERNAME = 'GMAIL_USERNAME'
 GMAIL_PASSWORD = 'GMAIL_PASSWORD'
 driver = webdriver.Firefox()
+# switch back to previous window
+switch_back_cmd = """
+osascript -e 'tell application "System Events" to key code 48 using {command down}' 
+"""
+os.system(switch_back_cmd)
 launchMyASU(MY_ASU_URL, USERNAME, PASSWORD)
 classSearch(COURSE)
 quitBrowser()
