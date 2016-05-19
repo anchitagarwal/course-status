@@ -1,10 +1,10 @@
-from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import re
-import smtplib
 from twilio.rest import TwilioRestClient
-import os
+from selenium import webdriver
 from datetime import datetime
+import smtplib
+import re
+import os
 
 def launchMyASU(url, username, password):
 	driver.get(url)
