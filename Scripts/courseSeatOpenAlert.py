@@ -57,7 +57,7 @@ def sendMail():
 	smtpObj.login(GMAIL_USERNAME, GMAIL_PASSWORD)
 	# Prepare email body
 	FROM = 'seats.open@myasu.com'
-	TO = 'anchit008@gmail.com'
+	TO = 'GMAIL_USERNAME'
 	MESSAGE = 'From: %s\nTo: %s\nSubject: DUDE! Seats open for %s\n\nThank me later!' % (FROM, TO, COURSE)
 	# Send email
 	smtpObj.sendmail(FROM, TO, MESSAGE)
