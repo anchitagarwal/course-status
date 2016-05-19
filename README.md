@@ -39,15 +39,17 @@ Note: If `pip` isn't installed on your machine, do `python get-pip.py`
 4. Navigate to [Phone Numbers Dashboard](https://www.twilio.com/console/phone-numbers/dashboard)
 5. Register for a free number (Generally has a limit for monthly SMS. But it will be enough for this script.)
 6. This number will be your **Twilio Number**
-
+  
 
 ### plist - Configuration property list file
 ***
 The __configuration property list file__ contains information about your daemon. Specifying this information in a property list file lets _launchd_ register the corresponding file descriptors and launch the daemon only after a request arrives for the daemon's service.
 
-After the property list file is created, it can be launched with the following command
-`launchctl load <plist_file_path>`
+After the property list file is created, it can be launched with the following command  
+`launchctl load <plist_file_path>`  
+
 This loads your property file to the LaunchDaemons folder which is used by launchd to run the daemon when a request is received.
-The daemon can be stopped with the following command
-`launchctl unload <plist_file_path>`
+The daemon can be stopped with the following command  
+`launchctl unload <plist_file_path>`  
+
 Note: `launchctl list` displays all the daemons currently active. To learn more, please visit [Daemons and Services Programming Guide](https://developer.apple.com/library/mac/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/Introduction.html)
