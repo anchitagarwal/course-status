@@ -3,18 +3,19 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.myasu.script.plist</string>
+    <string>ANY_LABEL_STRING-com.myasu.script.plist</string>
     <key>ProgramArguments</key>
     <array>
         <string>/usr/bin/python</string>
-        <string>/Users/anchit/Documents/MyASURepo/Scripts/courseSeatOpenAlert.py</string>
+        <string>PATH_TO_SCRIPT</string>
     </array>
+    <!-- Determines the script running interval -->
     <key>StartInterval</key>
-    <integer>300</integer>
+        <integer>300</integer>
     <key>StandardOutPath</key>
-	<string>/tmp/myasu.out</string>
-	<key>StandardErrorPath</key>
-	<string>/tmp/myasu.err</string>
+	<string>PATH_TO_OUTPUT_FILE</string>
+    <key>StandardErrorPath</key>
+	<string>PATH_TO_ERROR_OUT_FILE</string>
     <key>RunAtLoad</key>
     <true/>
 </dict>
